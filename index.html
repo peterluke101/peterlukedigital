@@ -24,7 +24,7 @@
             --accent: #3DE8C3;
             --accent-dark: #2BC7A8;
             --text-primary: #FFFFFF;
-            --text-secondary: #A8B3CF;
+            --text-secondary: #B8C3DF;
             --text-muted: #6B7A99;
             --border: #1E2A3A;
             --border-hover: #2A3A52;
@@ -52,8 +52,8 @@
 
         /* Animation utilities */
         .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             animation: fadeInUp 0.8s ease forwards;
         }
 
@@ -68,6 +68,110 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 15, 28, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .nav-logo {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 15, 28, 0.95);
+                padding: 20px;
+                gap: 16px;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
         }
 
         /* Hero Section */
@@ -77,6 +181,7 @@
             align-items: center;
             position: relative;
             background: linear-gradient(135deg, var(--bg-primary) 0%, #0B1426 50%, var(--bg-secondary) 100%);
+            padding-top: 70px;
         }
 
         .hero::before {
@@ -86,15 +191,123 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(61, 232, 195, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(61, 232, 195, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(61, 232, 195, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(61, 232, 195, 0.025) 0%, transparent 50%);
             pointer-events: none;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+        }
+
+        .code-mockup {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(61, 232, 195, 0.08), 0 20px 40px rgba(0, 0, 0, 0.4);
+            font-size: 15px;
+        }
+
+        .code-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-window-controls {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .code-window-controls span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-window-controls span:nth-child(1) { background: #ff5f57; }
+        .code-window-controls span:nth-child(2) { background: #ffbd2e; }
+        .code-window-controls span:nth-child(3) { background: #28ca42; }
+
+        .code-content {
+            margin-top: 50px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            display: block;
+            opacity: 1;
+            animation: typeWriter 0.05s forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.5s; color: var(--text-secondary); }
+        .code-line:nth-child(2) { animation-delay: 1s; color: var(--accent); }
+        .code-line:nth-child(3) { animation-delay: 1.5s; color: var(--text-primary); }
+        .code-line:nth-child(4) { animation-delay: 2s; color: var(--text-secondary); }
+        .code-line:nth-child(5) { animation-delay: 2.5s; color: var(--accent); }
+        .code-line:nth-child(6) { animation-delay: 3s; color: var(--text-primary); }
+
+        @keyframes typeWriter {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .hero-visual {
+                order: 2;
+                min-height: 300px;
+            }
+            
+            .code-mockup {
+                max-width: 400px;
+                margin: 0 auto;
+            }
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
             animation-delay: 0.2s;
+        }
+
+        .hero-social-proof {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(61, 232, 195, 0.1);
+        }
+
+        .hero-stats {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .hero-badge {
@@ -534,8 +747,8 @@
 
         /* Scroll animations */
         .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -543,9 +756,30 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Animation fallback and accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-on-scroll {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Peter Luke Digital</a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -556,6 +790,30 @@
                 <h1>I Build Websites & Automation Systems That Actually Work</h1>
                 <p class="hero-subtitle">Full-stack developer specializing in WordPress, WooCommerce, and AI-powered automation. Based in Nevada, working with clients worldwide.</p>
                 <a href="#portfolio" class="cta-button">View My Work</a>
+                <div class="hero-social-proof">
+                    <div class="hero-stats">6+ Published Products • 30K+ Words Written • Available Now</div>
+                </div>
+            </div>
+            <div class="hero-visual fade-in">
+                <div class="code-mockup">
+                    <div class="code-window-controls">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="code-content">
+                        <pre style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.8; margin: 0; white-space: pre;"><span style="color: #6B7A99;">// pete-luke-digital/index.js</span>
+<span style="color: #C792EA;">const</span> <span style="color: #82AAFF;">developer</span> <span style="color: #fff;">= {</span>
+  <span style="color: #F78C6C;">name</span><span style="color: #fff;">:</span> <span style="color: #C3E88D;">'Peter Luke'</span><span style="color: #fff;">,</span>
+  <span style="color: #F78C6C;">stack</span><span style="color: #fff;">:</span> <span style="color: #fff;">[</span><span style="color: #C3E88D;">'WordPress'</span><span style="color: #fff;">,</span> <span style="color: #C3E88D;">'Next.js'</span><span style="color: #fff;">,</span> <span style="color: #C3E88D;">'WooCommerce'</span><span style="color: #fff;">],</span>
+  <span style="color: #F78C6C;">automation</span><span style="color: #fff;">:</span> <span style="color: #fff;">[</span><span style="color: #C3E88D;">'n8n'</span><span style="color: #fff;">,</span> <span style="color: #C3E88D;">'API'</span><span style="color: #fff;">,</span> <span style="color: #C3E88D;">'Claude'</span><span style="color: #fff;">],</span>
+  <span style="color: #F78C6C;">status</span><span style="color: #fff;">:</span> <span style="color: #3DE8C3;">'available'</span><span style="color: #fff;">,</span>
+  <span style="color: #F78C6C;">delivery</span><span style="color: #fff;">:</span> <span style="color: #C3E88D;">'async &amp; documented'</span>
+<span style="color: #fff;">};</span>
+
+<span style="color: #C792EA;">await</span> <span style="color: #82AAFF;">developer</span><span style="color: #fff;">.</span><span style="color: #82AAFF;">ship</span><span style="color: #fff;">();</span> <span style="color: #3DE8C3;">// ✓ Ready</span></pre>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -809,6 +1067,16 @@
         document.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
             el.style.animationDelay = `${index * 0.1}s`;
         });
+
+        // Animation fallback - force opacity after 1 second
+        setTimeout(() => {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                if (!el.classList.contains('animate')) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }, 1000);
     </script>
 </body>
 </html>
